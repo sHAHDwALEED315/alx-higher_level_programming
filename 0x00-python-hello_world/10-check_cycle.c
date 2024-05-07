@@ -12,20 +12,22 @@
 int check_cycle(listint_t *list)
 {
 
-	const listint_t *current;
+        listint_t *slow, *fast;	
 
 	current = list;
 
 	if (!list)
 		return (0);
-
-	while (current != NULL)
+        slow = list;
+	fast = list->next;
+	while (fast && slow && fast->next)
 	{
-		current = current->next;
-                if (current == list)
-	        {
+		if (slow == fast)
+		{
 			return (1);
 		}
+		slow = slow->next;
+		fast = fast->next->next;
 	}
 
 	return (0);
